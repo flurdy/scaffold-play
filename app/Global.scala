@@ -13,5 +13,20 @@ object Global extends GlobalSettings {
     Logger.info("Application shutdown...")
   }
 
+  override def onError(request: RequestHeader, exception: Throwable) = {
+    InternalServerError(
+      views.html.error.applicationError(exception)
+    )
+  }
+
+  override def onHandlerNotFound(request: RequestHeader): Result = {
+    NotFound(
+      views.html.error.notFound(request.path)
+    )
+  }
+
+  override def onBadRequest(request: RequestHeader, error: String) = {
+    BadRequest("Bad Request: " + error)
+  }
 
 }

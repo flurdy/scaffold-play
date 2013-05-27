@@ -1,15 +1,32 @@
-@(title: String)(content: Html)
+@(content: Html)
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
+        <title>@Messages("app.title")</title>
+			<link rel='stylesheet' media="screen" href='@routes.WebJarAssets.at(WebJarAssets.locate("css/bootstrap.min.css"))'>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/cargo.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+			<script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
     </head>
     <body>
+
+        <navigation>
+            <ul class="horizontal">
+                <li><a href="@routes.Application.index()">home</a></li>
+            </ul>
+        </navigation>
+
+		<header class="well">
+			<h1>@Messages("app.title")</h1>
+		</header>
+
+
         @content
+
+
+
     </body>
 </html>

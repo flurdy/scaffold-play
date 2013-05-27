@@ -1,0 +1,14 @@
+
+body { background-color: #88bb99; max-width: 53em; min-width: 40em; }
+
+.well { margin: 1em; }
+
+header {  }
+header h1 { margin: 0.2em 4em; }
+
+navigation { float: right; margin: 0.2em 3em; }
+
+.horizontal { }
+.horizontal li { list-style: none; display: inline; }
+.horizontal li a { }
+
