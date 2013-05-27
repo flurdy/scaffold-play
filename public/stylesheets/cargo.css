@@ -12,3 +12,15 @@ navigation { float: right; margin: 0.2em 3em; }
 .horizontal li { list-style: none; display: inline; }
 .horizontal li a { }
 
+form .form-actions{ margin-bottom: 0; padding-bottom: 0; }
+form .form-actions button,
+form .form-actions input,
+form .form-actions a { margin-left: 1em; }
+
+.row-fluid [class*="span"]:first-child { margin-left:1em;}
+
+.row-fluid .well { min-height: 13em; }
+.row-fluid .well .btn { float: right;}
+.row-fluid .span6 {
+	width: 45.93617021276595%;
+}

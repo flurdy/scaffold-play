@@ -1,7 +1,13 @@
-@()
+@(simpleRegistrationForm: Form[ApplicationUser],loginForm: Form[(String,String)])
 
 @main {
 
+
+	<div class="row-fluid">
+		@register(simpleRegistrationForm)
+
+		@login(loginForm)
+	</div>
 
 
 }

@@ -1,0 +1,69 @@
+@(registrationForm: Form[UserCredentials])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main {
+ 	<div class="well">
+
+
+		<h3>Register</h3>
+
+		<h4>
+			Please complete the registration process
+		</h4>
+
+		<p class="dodgyfiller">&nbsp;</p>
+
+		@form(action = routes.RegistrationAuthentication.finishRegistrationProcess(), 'class -> "form-horizontal" ){
+			<div class="control-group">
+				<label class="control-label" for="applicationUser.fullname">
+					Name
+				</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="applicationUser.fullname" name="applicationUser.fullname" placeholder="your full name" maxlength="120" />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="applicationUser.username">
+					Username
+				</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="applicationUser.username" name="applicationUser.username" placeholder="your username or email address" maxlength="120" required />
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="applicationUser.email">
+					Email address
+				</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="applicationUser.email" name="applicationUser.email" placeholder="your email address" maxlength="120"/>
+				</div>
+			</div>
+			<fieldset>
+			<div class="control-group">
+				<label class="control-label" for="password">
+					Password
+				</label>
+				<div class="controls">
+					<input type="password" class="input-xlarge" id="password" name="password" placeholder="your password" maxlength="120" required/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="confirmPassword">
+					Confirm password
+				</label>
+				<div class="controls">
+					<input type="password" class="input-xlarge" id="confirmPassword" name="confirmPassword" placeholder="same password again" maxlength="120" required/>
+				</div>
+			</div>
+			</fieldset>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-success">complete registration</button>
+				<input type="reset" class="btn btn-warning" value="reset form"/>
+				<a href="@routes.Application.index()" class="btn btn-inverse">cancel</a>
+			</div>
+		}
+
+	</div>
+}

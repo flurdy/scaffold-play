@@ -1,0 +1,19 @@
+@(registrationForm: Form[ApplicationUser])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+ 	<div class="well span6">
+
+
+		<h3>Register</h3>
+
+		@form(action = routes.RegistrationAuthentication.startRegistrationProcess() ){
+			<input type="text" class="input-xlarge" name="fullname" placeholder="your full name" maxlength="120"/>
+			<input type="text" class="input-xlarge" name="username" placeholder="your username or email address" maxlength="120"/>
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">register</button>
+			</div>
+		}
+
+	</div>

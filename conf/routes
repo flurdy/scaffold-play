@@ -5,7 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index
 
-
+POST    /registation/start                 controllers.RegistrationAuthentication.startRegistrationProcess
+POST    /registation                 controllers.RegistrationAuthentication.finishRegistrationProcess
+POST    /login                 controllers.RegistrationAuthentication.loginProcess
 
 GET     /webjars/*file              controllers.WebJarAssets.at(file)
 
