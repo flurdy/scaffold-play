@@ -18,5 +18,7 @@ target
 tmp
 test-result
 server.pid
-*.iml
-*.eml
+.history
+dist
+/out
+/RUNNING_PID
