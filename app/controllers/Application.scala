@@ -19,17 +19,26 @@ object Application extends Controller {
 object RegistrationAuthentication extends Controller {
 
   val applicationUserMapping = mapping(
-  "username" -> nonEmptyText,
+  "username" -> nonEmptyText.verifying(
+        "Username is already taken. Please choose another",
+        !ApplicationUser.isUsernameAlreadyRegistered(_)),
   "email" -> optional(email),
   "fullname" -> optional(text))(ApplicationUser.apply)(ApplicationUser.unapply)
 
+  val passwordMapping = tuple (
+      "password" -> nonEmptyText,
+      "confirmPassword" -> nonEmptyText
+    ) verifying( "Passwords did not match. Please enter passwords again", fields => fields match {
+        case (password,confirmPassword) => password == confirmPassword
+    })
+
 	val userCredentialsMapping = mapping(
 	  "applicationUser" -> applicationUserMapping,
-	  "password" -> optional(text),
-	  "confirmPassword" -> optional(text))(
-	    (user,password,_) => UserCredentials(user ,password)
+    "passwords" -> passwordMapping
 	  )(
-	    (userCredentials: UserCredentials) => Some(userCredentials.user,None,None)
+	    (user,passwords) => UserCredentials( user, Some(passwords._1))
+	  )(
+	    (userCredentials: UserCredentials) => Some(userCredentials.user,("",""))
 	  )
 
 	val loginMapping = tuple(
@@ -51,14 +60,14 @@ object RegistrationAuthentication extends Controller {
     simpleRegistrationForm.bindFromRequest.fold (
       formWithErrors => {
         Logger.info("form bad")
-        Ok(views.html.fullregistration(fullRegistrationForm))
+        Ok(views.html.fullregistration(formWithErrors,fullRegistrationForm))
       },
       maybeValue => {
         Logger.info("form ok")
         val prefilled = fullRegistrationForm.fill{
           new UserCredentials(maybeValue)
         }
-        Ok(views.html.fullregistration(prefilled))
+        Ok(views.html.fullregistration(simpleRegistrationForm,prefilled))
       }
     )
   }
@@ -68,7 +77,7 @@ object RegistrationAuthentication extends Controller {
     fullRegistrationForm.bindFromRequest.fold (
       formWithErrors => {
         Logger.info("form bad")
-        BadRequest(views.html.fullregistration(formWithErrors))
+        BadRequest(views.html.fullregistration(simpleRegistrationForm,formWithErrors))
       },
       maybeValue => {
         Logger.info("form ok")
