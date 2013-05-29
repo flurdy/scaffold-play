@@ -23,7 +23,11 @@ object RegistrationAuthentication extends Controller {
         "Username is already taken. Please choose another",
         !ApplicationUser.isUsernameAlreadyRegistered(_)),
   "email" -> optional(email),
-  "fullname" -> optional(text))(ApplicationUser.apply)(ApplicationUser.unapply)
+  "fullname" -> optional(text))(
+    (username,email,fullname) => new ApplicationUser(username,email,fullname)
+  )(
+    (applicationUser:ApplicationUser) => Some((applicationUser.username,applicationUser.email,applicationUser.fullname))
+  )
 
   val passwordMapping = tuple (
       "password" -> nonEmptyText,
@@ -44,7 +48,7 @@ object RegistrationAuthentication extends Controller {
 	val loginMapping = tuple(
 	  "username" -> nonEmptyText,
 	  "password" -> nonEmptyText
-	  ) verifying("Invalid authentication", fields => fields match {
+	  ) verifying("Authentication failed. Please verify your credentials", fields => fields match {
 	    case (username,password) => UserCredentials.authenticate(username,password).isDefined
   	})
 
@@ -79,10 +83,11 @@ object RegistrationAuthentication extends Controller {
         Logger.info("form bad")
         BadRequest(views.html.fullregistration(simpleRegistrationForm,formWithErrors))
       },
-      maybeValue => {
+      registrationValues => {
         Logger.info("form ok")
+        registrationValues.register
         //
-        // Persist registration here
+        // Add login to session here
         //
         Ok(views.html.index(simpleRegistrationForm,loginForm))
       }
