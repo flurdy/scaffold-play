@@ -1,0 +1,26 @@
+@(loginForm: Form[(String,String)])
+@import helper._
+
+
+<div class="well span6">
+
+
+	<h3>Log in</h3>
+
+
+	@if(loginForm.hasGlobalErrors){
+		<div class="alert alert-error">
+			@loginForm.globalErrors.head.message
+		</div>
+	}
+
+	@form(action = routes.RegistrationAuthentication.loginProcess() ){
+		<input type="text" class="input-xlarge" name="applicationUser.username" placeholder="your username or email address" maxlength="120" required value="@loginForm("username").value.getOrElse("")"/>
+		<input type="password" class="input-xlarge" name="password" placeholder="your password" maxlength="120" required/>
+		<div class="form-actions">
+			<button type="submit" class="btn btn-success">log in</button>
+		</div>
+	}
+
+
+</div>

@@ -1,15 +1,22 @@
+
 # Routes
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                       controllers.Application.index
 
-POST    /registation/start                 controllers.RegistrationAuthentication.startRegistrationProcess
-POST    /registation                 controllers.RegistrationAuthentication.finishRegistrationProcess
-POST    /login                 controllers.RegistrationAuthentication.loginProcess
+GET     /login                  controllers.RegistrationAuthentication.showLogin
+POST    /login                  controllers.RegistrationAuthentication.loginProcess
+GET     /logout                 controllers.RegistrationAuthentication.logout
+
+GET     /registration           controllers.RegistrationAuthentication.showRegistration
+POST    /registration           controllers.RegistrationAuthentication.startRegistrationProcess
+GET     /registration/complete  controllers.RegistrationAuthentication.redirectToRegistration
+POST    /registration/complete  controllers.RegistrationAuthentication.finishRegistrationProcess
+
+# Map static resources from the /public folder to the /assets URL path
 
 GET     /webjars/*file              controllers.WebJarAssets.at(file)
 
-# Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
