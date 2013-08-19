@@ -1,1 +1,48 @@
 app.title=Scaffolding Play!
+
+
+
+register.title=Register
+register.description=Please complete the registration process
+register.action=register
+register.action.complete=complete registration
+register.name=Name
+register.name.placeholder=your full name
+register.username=Username
+register.username.title=Note username has to be without spaces. Characters allowed are basic alphanumeric characters, underscore and dashes. The username also have to be unique and not already registered.
+register.username.placeholder=your username or email address
+register.username2.placeholder=a username or your email address
+register.email=Email address
+register.email.placeholder=your email address
+register.confirm.placeholder=your password again
+register.password=Password
+register.confirm=Confirm password
+
+login.title=Log in
+login.password.placeholder=your password
+login.action=log in
+
+reset.action=reset form
+cancel.action= cancel
+
+profile.title=Profile of
+profile.action=update profile
+profile.password.action=change password
+profile.delete.action=delete profile
+
+profile.password.title=Change password of
+profile.password.current=Current password
+profile.password.current.placeholder=Current password
+profile.password.new=New password
+profile.password.new.placeholder=your new password
+profile.confirm.placeholder=your new password again
+
+
+profile.reset.title=Reset password for
+profile.reset.action=reset password
+profile.reset.username.placeholder=your username
+
+profile.delete.title=Confirm you want to delete the profile of
+profile.delete.action=delete profile
+
+

@@ -1,0 +1,55 @@
+@(resetPasswordForm: Form[(String,String)])(implicit flash: Flash)
+
+@import helper._
+
+
+@main{
+
+ 	<section class="well">
+
+		<h3>@Messages("profile.reset.title")</h3>
+
+	</section>
+
+ 	<section class="well">
+
+
+		@form(action = routes.OpenProfile.resetPassword(), 'class -> "form-horizontal"){
+
+
+			@if(resetPasswordForm("username").error.isDefined){
+				<div class="alert">@resetPasswordForm("username").error.get.message</div>
+			}
+			<div class="control-group @if(resetPasswordForm("username").error.isDefined){ error }">
+				<label class="control-label" for="username">
+					@Messages("register.username")
+				</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="username" name="username" placeholder="@Messages("profile.reset.username.placeholder")" required maxlength="120" value="@resetPasswordForm("username").value.getOrElse("")"/>
+				</div>
+			</div>
+
+
+			@if(resetPasswordForm("email").error.isDefined){
+				<div class="alert">@resetPasswordForm("email").error.get.message</div>
+			}
+			<div class="control-group @if(resetPasswordForm("email").error.isDefined){ error }">
+				<label class="control-label" for="email">
+					@Messages("register.email")
+				</label>
+				<div class="controls">
+					<input type="email" class="input-xlarge" id="email" name="email" placeholder="@Messages("register.email.placeholder")" required maxlength="120" value="@resetPasswordForm("email").value.getOrElse("")"/>
+				</div>
+			</div>
+
+
+
+			<div class="form-actions">
+				<a href="@routes.Application.index" class="btn btn-inverse pull-right">@Messages("cancel.form")</a>
+				<button type="submit" class="btn btn-warning pull-right">@Messages("profile.reset.action")</button>
+			</div>
+
+		}
+	</section>
+
+}

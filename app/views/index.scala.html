@@ -1,13 +1,15 @@
-@(simpleRegistrationForm: Form[ApplicationUser],loginForm: Form[(String,String)])
+@(simpleRegistrationForm: Form[ApplicationUser],loginForm: Form[(String,String)])(implicit currentApplicationUser: Option[ApplicationUser])
 
 @main {
 
+	@if(!currentApplicationUser.isDefined){
 
-	<div class="row-fluid">
+	<section class="row-fluid">
 		@registertile(simpleRegistrationForm)
 
 		@logintile(loginForm)
-	</div>
+	</section>
+    }
 
 
 }

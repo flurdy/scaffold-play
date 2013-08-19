@@ -1,0 +1,92 @@
+@(profile: ApplicationUser, profileForm: Form[ApplicationUser])(implicit currentApplicationUser: Option[ApplicationUser], flash: Flash)
+
+@import helper._
+
+
+@main{
+
+ 	<section class="well">
+
+		<h3>@Messages("profile.title") <a href="@routes.Profile.showProfile(profile.userId.get)">@profile.username</a></h3>
+
+	</section>
+
+ 	<section class="well">
+
+		@if(profileForm.hasGlobalErrors){
+			<div class="alert alert-error">
+				@profileForm.globalErrors.head.message
+			</div>
+		}
+
+		@if(profileForm.hasErrors){
+			<div class="alert alert-error">
+				@profileForm.errors.head.message
+			</div>
+		}
+
+		@form(action = routes.Profile.updateProfile(profile.userId.get), 'class -> "form-horizontal"){
+
+
+			@if(profileForm("fullname").error.isDefined){
+				<div class="alert">@profileForm("fullname").error.get.message</div>
+			}
+			<div class="control-group @if(profileForm("fullname").error.isDefined){ error }">
+				<label class="control-label" for="applicationUser.fullname">
+					@Messages("name.title")
+				</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="applicationUser.fullname" name="fullname" placeholder="@Messages("register.name.placeholder")" maxlength="120" value="@profileForm("fullname").value.getOrElse(profile.fullname.getOrElse(""))" />
+				</div>
+			</div>
+
+
+			@if(profileForm("email").error.isDefined){
+				<div class="alert">@profileForm("email").error.get.message</div>
+			}
+			<div class="control-group @if(profileForm("email").error.isDefined){ error }">
+				<label class="control-label" for="applicationUser.email">
+					@Messages("register.email")
+				</label>
+				<div class="controls">
+					<input type="email" class="input-xlarge" id="applicationUser.email" name="email" placeholder="@Messages("register.email.placeholder")" maxlength="120" value="@profileForm("email").value.getOrElse(profile.email.getOrElse(""))"/>
+				</div>
+			</div>
+
+
+			<div class="form-actions">
+				<a href="@routes.Application.index()" class="btn btn-inverse pull-right">@Messages("cancel.action")</a>
+				<button type="submit" class="btn btn-primary pull-right">@Messages("profile.action")</button>
+			</div>
+
+		}
+	</section>
+
+
+
+ 	<section class="well">
+
+		@form(action = routes.Profile.showChangePassword(profile.userId.get), 'class -> "form-horizontal"){
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-warning pull-right">@Messages("profile.password.action")</button>
+			</div>
+
+		}
+
+	</section>
+
+
+
+ 	<section class="well">
+
+		@form(action = routes.Profile.showDeleteProfile(profile.userId.get), 'class -> "form-horizontal"){
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-danger pull-right">@Messages("profile.delete.action")</button>
+			</div>
+
+		}
+
+	</section>
+}

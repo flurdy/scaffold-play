@@ -15,6 +15,21 @@ POST    /registration           controllers.RegistrationAuthentication.startRegi
 GET     /registration/complete  controllers.RegistrationAuthentication.redirectToRegistration
 POST    /registration/complete  controllers.RegistrationAuthentication.finishRegistrationProcess
 
+
+GET         /profile/:profileId            controllers.Profile.showProfile(profileId: String)
+POST         /profile/:profileId           controllers.Profile.updateProfile(profileId: String)
+GET         /profile/:profileId/password   controllers.Profile.showChangePassword(profileId: String)
+POST         /profile/:profileId/password  controllers.Profile.changePassword(profileId: String)
+GET         /profile/:profileId/delete     controllers.Profile.showDeleteProfile(profileId: String)
+POST         /profile/:profileId/delete    controllers.Profile.deleteProfile(profileId: String)
+
+GET         /profile/password/reset        controllers.OpenProfile.showResetPassword()
+GET         /profile/password/reset/sent        controllers.OpenProfile.showPasswordReset()
+POST        /profile/password/reset        controllers.OpenProfile.resetPassword()
+
+
+
+
 # Map static resources from the /public folder to the /assets URL path
 
 GET     /webjars/*file              controllers.WebJarAssets.at(file)

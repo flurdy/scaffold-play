@@ -1,0 +1,27 @@
+@(profile: ApplicationUser)(implicit currentApplicationUser: Option[ApplicationUser], flash: Flash)
+
+@import helper._
+
+
+@main{
+
+	<section class="well">
+
+		<h3>@Messages("profile.delete.title") <a href="@routes.Profile.showProfile(profile.userId.get)">@profile.username</a></h3>
+
+	</section>
+
+
+ 	<section class="well">
+
+		@form(action = routes.Profile.deleteProfile(profile.userId.get), 'class -> "form-horizontal"){
+
+			<div class="form-actions">
+				<a href="@routes.Profile.showProfile(profile.userId.get)" class="btn btn-inverse pull-right">@Messages("cancel.action")</a>
+				<button type="submit" class="btn btn-danger pull-right">@Messages("profile.delete.action")</button>
+			</div>
+
+		}
+
+	</section>
+}
